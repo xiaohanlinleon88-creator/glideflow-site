@@ -26,8 +26,9 @@ export const siteConfig = {
   supportEmail: "support@glideflowai.com",
   description:
     "Drop-in OpenAI-compatible API. One key for multiple models, USD billing, and a familiar SDK setup for independent developers.",
-  ctaHref: "https://app.glideflowai.com",
+  ctaHref: "https://app.glideflowai.com/register",
   loginHref: "https://app.glideflowai.com/login",
+  registerHref: "https://app.glideflowai.com/register",
   docsHref: "/docs",
   termsHref: "#",
   models: [

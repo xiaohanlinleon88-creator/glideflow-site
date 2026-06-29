@@ -11,7 +11,7 @@ const navItems = [
   { label: "Models", href: "#models" },
   { label: "Privacy", href: "#privacy" },
   { label: "Docs", href: siteConfig.docsHref },
-  { label: "Login", href: siteConfig.loginHref }
+  { label: "Sign in", href: siteConfig.loginHref }
 ];
 
 const privacyPoints = [
@@ -77,9 +77,9 @@ const faqs = [
         <div class="flex shrink-0 items-center gap-2">
           <a
             href={siteConfig.loginHref}
-            class="hidden rounded-md border border-black/15 bg-white/72 px-4 py-2 text-sm font-semibold text-[#07110f] transition hover:border-black/30 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-white/30 sm:inline-flex"
+            class="inline-flex rounded-md border border-black/15 bg-white/72 px-4 py-2 text-sm font-semibold text-[#07110f] transition hover:border-black/30 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-white/30"
           >
-            Login
+            Sign in
           </a>
           <a
             href={siteConfig.ctaHref}
@@ -112,7 +112,7 @@ const faqs = [
               href={siteConfig.loginHref}
               class="inline-flex min-h-11 items-center justify-center rounded-md border border-black/15 bg-white/72 px-5 text-sm font-semibold text-[#07110f] transition hover:border-black/30 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-white/30"
             >
-              Login
+              Sign in
             </a>
             <a
               href="#pricing"
@@ -231,8 +231,8 @@ const faqs = [
         </div>
         <div class="flex flex-wrap gap-5 text-sm text-white/68">
           <a class="hover:text-white" href={siteConfig.docsHref}>Docs</a>
-          <a class="hover:text-white" href={siteConfig.loginHref}>Login</a>
-          <a class="hover:text-white" href={siteConfig.ctaHref}>Dashboard</a>
+          <a class="hover:text-white" href={siteConfig.loginHref}>Sign in</a>
+          <a class="hover:text-white" href={siteConfig.appUrl}>Dashboard</a>
           <a class="hover:text-white" href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
           <a class="hover:text-white" href={siteConfig.termsHref}>Terms</a>
         </div>
