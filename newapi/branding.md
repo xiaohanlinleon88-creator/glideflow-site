@@ -16,9 +16,13 @@ Key assumption: only the configurable new-api surfaces are branded here. The log
 - Dark wordmark: `https://glideflowai.com/brand/logo-dark.svg`
 - Light wordmark: `https://glideflowai.com/brand/logo-light.svg`
 - Square avatar/logo: `https://glideflowai.com/brand/avatar.svg`
+- PNG logo for new-api `/logo.png`: `https://glideflowai.com/brand/logo.png`
+- PNG favicon fallback: `https://glideflowai.com/brand/favicon.png`
+- ICO favicon fallback: `https://glideflowai.com/brand/favicon.ico`
 - Favicon: `https://glideflowai.com/brand/favicon.svg`
 
 Use the square avatar/logo for compact logo fields. Use the dark wordmark when the setting renders on a dark background, and the light wordmark when the setting renders on a white or light background.
+For browser tab icons and new-api routes named `.png` or `.ico`, prefer the PNG/ICO fallback URLs instead of SVG.
 
 ## Homepage content
 
@@ -35,6 +39,20 @@ Expected links in that HTML:
 - Allow new user registration: `On`
 - Email verification: `Off` until SMTP is configured
 - Unconfigured third-party login methods: `Off`
+
+## Caddy favicon/logo routes for app.glideflowai.com
+
+Put these route rules before the `reverse_proxy` rule in the `app.glideflowai.com` site block:
+
+```caddy
+@brandIcons path /favicon.ico /favicon.png /logo.png /apple-touch-icon.png
+header @brandIcons Cache-Control "no-store, max-age=0, must-revalidate"
+
+redir /favicon.ico https://glideflowai.com/brand/favicon.ico 302
+redir /favicon.png https://glideflowai.com/brand/favicon.png 302
+redir /logo.png https://glideflowai.com/brand/logo.png 302
+redir /apple-touch-icon.png https://glideflowai.com/brand/logo.png 302
+```
 
 ## Footer or about HTML
 
