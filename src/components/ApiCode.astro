@@ -1,0 +1,181 @@
+---
+import { getApiExamples } from "../config/site";
+
+type Mode = "tabs" | "stacked" | "single";
+
+const {
+  mode = "tabs",
+  language = "python",
+  title = "OpenAI SDK, different base URL"
+}: { mode?: Mode; language?: string; title?: string } = Astro.props;
+
+const examples = getApiExamples();
+const selected = examples.find((example) => example.id === language) ?? examples[1];
+---
+
+{
+  mode === "single" ? (
+    <figure class="api-code api-code-single">
+      <figcaption>{title}</figcaption>
+      <pre><code>{selected.code}</code></pre>
+    </figure>
+  ) : mode === "stacked" ? (
+    <div class="api-code-stack">
+      {examples.map((example) => (
+        <figure class="api-code">
+          <figcaption>{example.label}</figcaption>
+          <pre><code>{example.code}</code></pre>
+        </figure>
+      ))}
+    </div>
+  ) : (
+    <div class="api-code-tabs" data-code-tabs>
+      <div class="api-tab-list" role="tablist" aria-label="Quick start language">
+        {examples.map((example, index) => (
+          <button
+            type="button"
+            role="tab"
+            aria-selected={index === 0 ? "true" : "false"}
+            data-code-tab={example.id}
+          >
+            {example.label}
+          </button>
+        ))}
+      </div>
+      {examples.map((example, index) => (
+        <figure class="api-code" data-code-panel={example.id} hidden={index !== 0}>
+          <pre><code>{example.code}</code></pre>
+        </figure>
+      ))}
+    </div>
+  )
+}
+
+<script>
+  document.querySelectorAll("[data-code-tabs]").forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll("[data-code-tab]"));
+    const panels = Array.from(root.querySelectorAll("[data-code-panel]"));
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const id = tab.getAttribute("data-code-tab");
+
+        tabs.forEach((item) => {
+          item.setAttribute("aria-selected", String(item === tab));
+        });
+
+        panels.forEach((panel) => {
+          panel.toggleAttribute("hidden", panel.getAttribute("data-code-panel") !== id);
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .api-code-tabs,
+  .api-code,
+  .api-code-stack {
+    width: 100%;
+  }
+
+  .api-code-tabs {
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #07110f;
+    color: #d8fff2;
+    box-shadow: 0 24px 80px rgb(0 0 0 / 0.18);
+  }
+
+  .api-tab-list {
+    display: flex;
+    gap: 2px;
+    padding: 8px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.04);
+  }
+
+  .api-tab-list button {
+    min-height: 34px;
+    padding: 0 12px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: transparent;
+    color: #a7f3d0;
+    font: inherit;
+    font-size: 0.86rem;
+    cursor: pointer;
+  }
+
+  .api-tab-list button[aria-selected="true"] {
+    border-color: rgb(94 234 212 / 0.32);
+    background: rgb(94 234 212 / 0.12);
+    color: #ffffff;
+  }
+
+  .api-code {
+    margin: 0;
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #07110f;
+    color: #d8fff2;
+  }
+
+  .api-code-tabs .api-code {
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .api-code figcaption {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    background: rgb(255 255 255 / 0.04);
+    color: #a7f3d0;
+    font-size: 0.82rem;
+    font-weight: 600;
+  }
+
+  .api-code pre {
+    margin: 0;
+    min-height: 220px;
+    overflow-x: auto;
+    padding: 18px;
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+    font-size: clamp(0.78rem, 1.6vw, 0.92rem);
+    line-height: 1.65;
+    tab-size: 2;
+  }
+
+  .api-code code {
+    font-family: inherit;
+    white-space: pre;
+  }
+
+  .api-code-stack {
+    display: grid;
+    gap: 16px;
+  }
+
+  .api-code-single pre {
+    min-height: 300px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+
+  @media (max-width: 640px) {
+    .api-tab-list {
+      overflow-x: auto;
+    }
+
+    .api-code pre {
+      min-height: 0;
+      padding: 14px;
+      font-size: 0.78rem;
+    }
+  }
+</style>

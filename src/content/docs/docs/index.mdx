@@ -1,0 +1,31 @@
+---
+title: Getting Started
+description: Get an API key, set the OpenAI-compatible base URL, and make your first request.
+sidebar:
+  order: 1
+---
+
+import ApiCode from "../../../components/ApiCode.astro";
+import { siteConfig } from "../../../config/site";
+
+Glideflow gives independent developers one OpenAI-compatible endpoint for DeepSeek, Qwen, and GLM models. You keep the OpenAI SDK shape and point it at the Glideflow base URL.
+
+## 1. Get an API key
+
+Create or log in to your Glideflow dashboard at <a href={siteConfig.appUrl}>{siteConfig.appUrl}</a>. From there you can register, create API keys, and manage credits.
+
+Keys use the familiar `sk-...` bearer token shape.
+
+## 2. Set the base URL
+
+Use <code>{siteConfig.apiBaseUrl}</code> as your OpenAI SDK base URL.
+
+## 3. Make your first request
+
+<ApiCode mode="stacked" />
+
+## Next steps
+
+- Read [Authentication](/docs/authentication/) for bearer token usage.
+- Read [Endpoints](/docs/endpoints/) for supported OpenAI-compatible routes.
+- Read [Models & Pricing](/docs/models-pricing/) for configured model IDs and placeholder launch pricing.

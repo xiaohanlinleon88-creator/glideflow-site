@@ -1,0 +1,40 @@
+---
+title: Endpoints
+description: OpenAI-compatible chat completions and model listing endpoints.
+sidebar:
+  order: 3
+---
+
+import { primaryModel, siteConfig } from "../../../config/site";
+
+Glideflow is a new-api gateway with OpenAI-compatible request and response shapes.
+
+## Base URL
+
+<code>{siteConfig.apiBaseUrl}</code>
+
+## Chat completions
+
+```http
+POST /v1/chat/completions
+```
+
+Use the same body shape as OpenAI chat completions:
+
+<pre><code>{`{
+  "model": "${primaryModel.id}",
+  "messages": [
+    { "role": "user", "content": "Hello" }
+  ],
+  "stream": false
+}`}</code></pre>
+
+The default model shown in examples is <code>{primaryModel.id}</code>.
+
+## Models
+
+```http
+GET /v1/models
+```
+
+Use this endpoint to inspect the currently available model list once production routing is connected.

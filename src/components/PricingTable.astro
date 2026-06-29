@@ -1,0 +1,92 @@
+---
+import { formatUsdPerMillion, siteConfig } from "../config/site";
+
+const { showSources = false }: { showSources?: boolean } = Astro.props;
+---
+
+<div class="pricing-table-wrap">
+  <table class="pricing-table">
+    <thead>
+      <tr>
+        <th scope="col">Model</th>
+        <th scope="col">Best for</th>
+        <th scope="col">Input</th>
+        <th scope="col">Output</th>
+      </tr>
+    </thead>
+    <tbody>
+      {siteConfig.models.map((model) => (
+        <tr>
+          <th scope="row">
+            <span>{model.name}</span>
+            <code>{model.id}</code>
+          </th>
+          <td>{model.bestFor}</td>
+          <td>{formatUsdPerMillion(model.inputPrice)} / 1M tokens</td>
+          <td>{formatUsdPerMillion(model.outputPrice)} / 1M tokens</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+  {showSources && (
+    <p class="pricing-note">
+      Prices are configured placeholders. Update <code>src/config/site.ts</code> before launch.
+    </p>
+  )}
+</div>
+
+<style>
+  .pricing-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    border-radius: 8px;
+    background: color-mix(in srgb, Canvas 94%, currentColor 6%);
+  }
+
+  .pricing-table {
+    width: 100%;
+    min-width: 680px;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+  }
+
+  .pricing-table th,
+  .pricing-table td {
+    padding: 16px;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .pricing-table thead th {
+    color: color-mix(in srgb, currentColor 66%, transparent);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .pricing-table tbody tr:last-child th,
+  .pricing-table tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  .pricing-table th span {
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  .pricing-table code {
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+    font-size: 0.78rem;
+    color: #0f766e;
+  }
+
+  .pricing-note {
+    margin: 0;
+    padding: 12px 16px;
+    border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    color: color-mix(in srgb, currentColor 70%, transparent);
+    font-size: 0.86rem;
+  }
+</style>

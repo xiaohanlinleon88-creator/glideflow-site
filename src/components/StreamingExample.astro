@@ -1,0 +1,35 @@
+---
+import { getStreamingExample } from "../config/site";
+---
+
+<figure class="streaming-code">
+  <figcaption>Node streaming with <code>stream: true</code></figcaption>
+  <pre><code>{getStreamingExample()}</code></pre>
+</figure>
+
+<style>
+  .streaming-code {
+    margin: 1.25rem 0;
+    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    border-radius: 8px;
+    overflow: hidden;
+    background: #07110f;
+    color: #d8fff2;
+  }
+
+  .streaming-code figcaption {
+    padding: 10px 14px;
+    border-bottom: 1px solid rgb(255 255 255 / 0.1);
+    color: #a7f3d0;
+    font-size: 0.86rem;
+  }
+
+  .streaming-code pre {
+    margin: 0;
+    overflow-x: auto;
+    padding: 18px;
+    font-family: var(--sl-font-mono, "SFMono-Regular", Consolas, monospace);
+    font-size: 0.9rem;
+    line-height: 1.65;
+  }
+</style>

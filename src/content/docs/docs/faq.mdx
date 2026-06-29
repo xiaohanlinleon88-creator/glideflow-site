@@ -1,0 +1,32 @@
+---
+title: FAQ
+description: Common questions about pricing, data flow, payments, and SDK compatibility.
+sidebar:
+  order: 9
+---
+
+import { siteConfig } from "../../../config/site";
+
+## Why is Glideflow cheaper?
+
+Glideflow focuses on cost-efficient DeepSeek, Qwen, and GLM models behind an OpenAI-compatible gateway. You avoid rewriting client code while using models with much lower serving costs than many frontier-lab options.
+
+## Do I need a Chinese phone number or payment account?
+
+No. Use the Glideflow dashboard at <a href={siteConfig.appUrl}>{siteConfig.appUrl}</a> to register, log in, create keys, and manage credits. You should not need a Chinese phone number, Alipay account, or local identity flow.
+
+## Is my data sent to China?
+
+Requests pass through the Glideflow gateway and are forwarded to the selected upstream model provider. Some providers may operate infrastructure or data processing outside your country. Treat that routing path as part of your vendor review.
+
+## How is this different from OpenRouter?
+
+OpenRouter is a broad multi-provider marketplace. Glideflow is intentionally narrower: a focused set of high-value Chinese and open models, USD billing, and simple OpenAI-compatible setup for independent developers.
+
+## Which SDKs work?
+
+Any OpenAI-compatible SDK or HTTP client should work. The docs include curl, Python with `openai`, and Node with `openai`.
+
+## Where do I log in?
+
+Use <a href={siteConfig.loginHref}>{siteConfig.loginHref}</a>.

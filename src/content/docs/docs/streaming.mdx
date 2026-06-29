@@ -1,0 +1,23 @@
+---
+title: Streaming
+description: Use stream true to receive Server-Sent Events from chat completions.
+sidebar:
+  order: 4
+---
+
+import StreamingExample from "../../../components/StreamingExample.astro";
+import { primaryModel } from "../../../config/site";
+
+Streaming follows the OpenAI-compatible chat completions pattern. Set `stream: true` and consume the response as Server-Sent Events.
+
+<pre><code>{`{
+  "model": "${primaryModel.id}",
+  "stream": true,
+  "messages": [
+    { "role": "user", "content": "Write a tiny launch checklist." }
+  ]
+}`}</code></pre>
+
+<StreamingExample />
+
+When streaming over raw HTTP, read each SSE `data:` event until the upstream provider finishes the completion.

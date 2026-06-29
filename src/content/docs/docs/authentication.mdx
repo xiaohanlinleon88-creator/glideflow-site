@@ -1,0 +1,23 @@
+---
+title: Authentication
+description: Use OpenAI-style bearer tokens with every request.
+sidebar:
+  order: 2
+---
+
+import { siteConfig } from "../../../config/site";
+
+Send your API key in the `Authorization` header:
+
+```http
+Authorization: Bearer sk-xxxxxx
+```
+
+Example request:
+
+<pre><code>{`curl ${siteConfig.apiBaseUrl}/models \\
+  -H "Authorization: Bearer sk-xxxxxx"`}</code></pre>
+
+For SDKs, pass the key as `api_key` in Python or `apiKey` in Node, and set the base URL to <code>{siteConfig.apiBaseUrl}</code>.
+
+Keep keys out of browsers, mobile apps, public repositories, and client-side logs.

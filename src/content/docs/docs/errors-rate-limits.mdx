@@ -1,0 +1,23 @@
+---
+title: Errors & Rate Limits
+description: OpenAI-style error responses and placeholder rate limit behavior.
+sidebar:
+  order: 7
+---
+
+Glideflow returns OpenAI-style JSON errors where possible. Exact production limits will be finalized with the gateway configuration.
+
+| Status | Meaning | Typical fix |
+| --- | --- | --- |
+| `400` | Invalid request body, missing model, or unsupported parameter. | Check JSON shape and model ID. |
+| `401` | Missing or invalid API key. | Send `Authorization: Bearer sk-...`. |
+| `402` | No available balance or credits. | Add credits or redeem a code when payments are live. |
+| `404` | Unknown endpoint or model. | Confirm the route and configured model list. |
+| `429` | Rate limit exceeded. | Retry with backoff or reduce concurrency. |
+| `500` | Gateway or upstream provider error. | Retry later and contact support if it persists. |
+
+Recommended retry behavior:
+
+```text
+Retry only idempotent requests, use exponential backoff, and avoid retry storms when you receive 429 or 5xx responses.
+```

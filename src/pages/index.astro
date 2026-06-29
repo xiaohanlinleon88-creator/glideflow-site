@@ -1,0 +1,242 @@
+---
+import ApiCode from "../components/ApiCode.astro";
+import ComparisonTable from "../components/ComparisonTable.astro";
+import ModelCards from "../components/ModelCards.astro";
+import PricingTable from "../components/PricingTable.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../config/site";
+
+const navItems = [
+  { label: "Pricing", href: "#pricing" },
+  { label: "Models", href: "#models" },
+  { label: "Privacy", href: "#privacy" },
+  { label: "Docs", href: siteConfig.docsHref },
+  { label: "Login", href: siteConfig.loginHref }
+];
+
+const privacyPoints = [
+  {
+    title: "Transparent routing",
+    body: "Requests are received by the Glideflow gateway, authenticated, metered, and forwarded to the selected upstream model provider."
+  },
+  {
+    title: "Built for indie workloads",
+    body: "Use it for prototypes, coding tools, side projects, and early products where practical cost matters more than enterprise procurement."
+  },
+  {
+    title: "Not for regulated data",
+    body: "Do not send medical, financial, government, or other regulated enterprise data unless your own review approves the full provider chain."
+  }
+];
+
+const faqs = [
+  {
+    question: "How does the pricing compare?",
+    answer:
+      "Glideflow routes OpenAI-compatible calls to efficient DeepSeek, Qwen, and GLM models, so you keep the familiar API shape while paying closer to open-model economics."
+  },
+  {
+    question: "Is my data safe?",
+    answer:
+      "Your request passes through our gateway and then to the upstream model provider you choose. That data flow is intentional and documented so you can decide what belongs here."
+  },
+  {
+    question: "How do payments work?",
+    answer:
+      "Create an account in the Glideflow dashboard to manage keys and credits. The goal is simple USD payment or redeemable credit codes, with no Chinese phone number, Alipay account, or local identity flow required."
+  },
+  {
+    question: "How is this different from OpenRouter?",
+    answer:
+      "Glideflow is narrower by design: a small set of high-value Chinese and open models, OpenAI-compatible endpoints, USD billing, and copy-paste setup for independent developers."
+  },
+  {
+    question: "Which SDKs are supported?",
+    answer:
+      "Any OpenAI-compatible client should work. The docs show curl, Python with openai, and Node with openai."
+  }
+];
+---
+
+<BaseLayout>
+  <main class="min-h-screen overflow-hidden bg-[#f7f8fb] text-[#101413] dark:bg-[#080a09] dark:text-[#f4f7f5]">
+    <section class="relative border-b border-black/10 bg-[#f7f8fb] dark:border-white/10 dark:bg-[#080a09]">
+      <div class="absolute inset-0 opacity-[0.55] dark:opacity-[0.36]" aria-hidden="true">
+        <div class="h-full w-full bg-[linear-gradient(to_right,rgba(15,118,110,.12)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,118,110,.12)_1px,transparent_1px)] bg-[size:56px_56px]"></div>
+      </div>
+      <header class="relative mx-auto flex max-w-6xl items-center justify-between gap-3 px-5 py-5">
+        <a href="/" class="flex items-center gap-3 font-semibold text-[#07110f] no-underline dark:text-white">
+          <span class="grid h-8 w-8 place-items-center rounded-md border border-emerald-400/40 bg-emerald-300/20 text-sm font-black text-emerald-800 dark:text-emerald-200">G</span>
+          <span>{siteConfig.brandName}</span>
+        </a>
+        <nav class="hidden items-center gap-6 text-sm text-black/68 dark:text-white/68 md:flex" aria-label="Primary navigation">
+          {navItems.map((item) => (
+            <a class="transition hover:text-black dark:hover:text-white" href={item.href}>{item.label}</a>
+          ))}
+        </nav>
+        <div class="flex shrink-0 items-center gap-2">
+          <a
+            href={siteConfig.loginHref}
+            class="hidden rounded-md border border-black/15 bg-white/72 px-4 py-2 text-sm font-semibold text-[#07110f] transition hover:border-black/30 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-white/30 sm:inline-flex"
+          >
+            Login
+          </a>
+          <a
+            href={siteConfig.ctaHref}
+            class="rounded-md border border-[#07110f] bg-[#07110f] px-4 py-2 text-sm font-semibold text-white transition hover:bg-[#163b34] dark:border-emerald-300 dark:bg-emerald-300 dark:text-[#07110f] dark:hover:bg-emerald-200"
+          >
+            Get API key
+          </a>
+        </div>
+      </header>
+
+      <div class="relative mx-auto max-w-6xl px-5 pb-14 pt-12 sm:pb-18 sm:pt-18 lg:pb-20">
+        <div class="max-w-4xl">
+          <p class="mb-5 inline-flex rounded-md border border-emerald-500/25 bg-emerald-300/12 px-3 py-1 text-sm font-semibold text-emerald-800 dark:text-emerald-200">
+            One OpenAI-compatible API. Multiple models, one key.
+          </p>
+          <h1 class="max-w-4xl text-balance text-5xl font-semibold leading-[1.02] text-[#07110f] dark:text-white md:text-7xl">
+            Drop-in OpenAI-compatible API. One key, many models.
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg leading-8 text-black/68 dark:text-white/70">
+            Point your existing OpenAI SDK at a single endpoint, then use the dashboard to register, create API keys, and manage credits.
+          </p>
+          <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+            <a
+              href={siteConfig.ctaHref}
+              class="inline-flex min-h-11 items-center justify-center rounded-md bg-[#07110f] px-5 text-sm font-semibold text-white transition hover:bg-[#163b34] dark:bg-emerald-300 dark:text-[#07110f] dark:hover:bg-emerald-200"
+            >
+              Get your API key
+            </a>
+            <a
+              href={siteConfig.loginHref}
+              class="inline-flex min-h-11 items-center justify-center rounded-md border border-black/15 bg-white/72 px-5 text-sm font-semibold text-[#07110f] transition hover:border-black/30 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-white/30"
+            >
+              Login
+            </a>
+            <a
+              href="#pricing"
+              class="inline-flex min-h-11 items-center justify-center rounded-md border border-black/15 bg-white/72 px-5 text-sm font-semibold text-[#07110f] transition hover:border-black/30 dark:border-white/15 dark:bg-white/8 dark:text-white dark:hover:border-white/30"
+            >
+              View pricing
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-10 max-w-4xl">
+          <ApiCode mode="single" language="python" />
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-white py-18 dark:border-white/10 dark:bg-[#0b0e0d]" id="compare">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="mb-8 max-w-2xl">
+          <p class="text-sm font-semibold uppercase text-emerald-700 dark:text-emerald-300">Price-performance</p>
+          <h2 class="mt-3 text-3xl font-semibold text-[#07110f] dark:text-white md:text-4xl">Use the API shape you know. Pay closer to open-model economics.</h2>
+          <p class="mt-4 leading-7 text-black/65 dark:text-white/68">
+            The comparison below is configured data, not hard-coded page copy. Update one file when final launch prices change.
+          </p>
+        </div>
+        <ComparisonTable />
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-[#f7f8fb] py-18 dark:border-white/10 dark:bg-[#080a09]" id="models">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="mb-8 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div class="max-w-2xl">
+            <p class="text-sm font-semibold uppercase text-cyan-700 dark:text-cyan-300">Models</p>
+            <h2 class="mt-3 text-3xl font-semibold text-[#07110f] dark:text-white md:text-4xl">A focused model menu for everyday builders.</h2>
+          </div>
+          <p class="max-w-md leading-7 text-black/65 dark:text-white/68">
+            Start with <code class="rounded-md bg-black/5 px-1.5 py-0.5 font-mono text-sm dark:bg-white/10">{siteConfig.models[0].id}</code>, then switch models without changing SDKs.
+          </p>
+        </div>
+        <ModelCards />
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-white py-18 dark:border-white/10 dark:bg-[#0b0e0d]" id="quickstart">
+      <div class="mx-auto grid max-w-6xl gap-8 px-5 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+        <div>
+          <p class="text-sm font-semibold uppercase text-emerald-700 dark:text-emerald-300">Quick start</p>
+          <h2 class="mt-3 text-3xl font-semibold text-[#07110f] dark:text-white md:text-4xl">Change the base URL. Keep the rest.</h2>
+          <p class="mt-4 leading-7 text-black/65 dark:text-white/68">
+            Glideflow follows the OpenAI request shape for chat completions and model listing. Point your existing client at <code class="rounded-md bg-black/5 px-1.5 py-0.5 font-mono text-sm dark:bg-white/10">{siteConfig.apiBaseUrl}</code>.
+          </p>
+        </div>
+        <ApiCode mode="tabs" />
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-[#f7f8fb] py-18 dark:border-white/10 dark:bg-[#080a09]" id="pricing">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="mb-8 max-w-2xl">
+          <p class="text-sm font-semibold uppercase text-cyan-700 dark:text-cyan-300">Pricing</p>
+          <h2 class="mt-3 text-3xl font-semibold text-[#07110f] dark:text-white md:text-4xl">USD per million tokens, by model.</h2>
+          <p class="mt-4 leading-7 text-black/65 dark:text-white/68">
+            Final launch prices can be replaced in config without touching page markup.
+          </p>
+        </div>
+        <PricingTable />
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-white py-18 dark:border-white/10 dark:bg-[#0b0e0d]" id="privacy">
+      <div class="mx-auto max-w-6xl px-5">
+        <div class="mb-8 max-w-2xl">
+          <p class="text-sm font-semibold uppercase text-amber-700 dark:text-amber-300">Data & privacy</p>
+          <h2 class="mt-3 text-3xl font-semibold text-[#07110f] dark:text-white md:text-4xl">Clear about the path your requests take.</h2>
+          <p class="mt-4 leading-7 text-black/65 dark:text-white/68">
+            Glideflow is for developers who value cost and compatibility, and who can choose what data is appropriate for third-party model routing.
+          </p>
+        </div>
+        <div class="grid gap-4 md:grid-cols-3">
+          {privacyPoints.map((point) => (
+            <article class="rounded-md border border-black/10 bg-[#f7f8fb] p-5 dark:border-white/10 dark:bg-white/5">
+              <h3 class="text-lg font-semibold text-[#07110f] dark:text-white">{point.title}</h3>
+              <p class="mt-3 leading-7 text-black/65 dark:text-white/68">{point.body}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="border-b border-black/10 bg-[#f7f8fb] py-18 dark:border-white/10 dark:bg-[#080a09]" id="faq">
+      <div class="mx-auto grid max-w-6xl gap-8 px-5 lg:grid-cols-[0.7fr_1.3fr]">
+        <div>
+          <p class="text-sm font-semibold uppercase text-emerald-700 dark:text-emerald-300">FAQ</p>
+          <h2 class="mt-3 text-3xl font-semibold text-[#07110f] dark:text-white md:text-4xl">Straight answers before you switch traffic.</h2>
+        </div>
+        <div class="divide-y divide-black/10 rounded-md border border-black/10 bg-white dark:divide-white/10 dark:border-white/10 dark:bg-white/5">
+          {faqs.map((faq) => (
+            <details class="group p-5">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-[#07110f] dark:text-white">
+                {faq.question}
+                <span class="text-xl leading-none text-emerald-700 transition group-open:rotate-45 dark:text-emerald-300">+</span>
+              </summary>
+              <p class="mt-3 leading-7 text-black/65 dark:text-white/68">{faq.answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-[#07110f] py-10 text-white">
+      <div class="mx-auto flex max-w-6xl flex-col gap-6 px-5 md:flex-row md:items-center md:justify-between">
+        <div>
+          <p class="font-semibold">{siteConfig.brandName}</p>
+          <p class="mt-2 text-sm text-white/60">OpenAI-compatible model access for independent developers.</p>
+        </div>
+        <div class="flex flex-wrap gap-5 text-sm text-white/68">
+          <a class="hover:text-white" href={siteConfig.docsHref}>Docs</a>
+          <a class="hover:text-white" href={siteConfig.loginHref}>Login</a>
+          <a class="hover:text-white" href={siteConfig.ctaHref}>Dashboard</a>
+          <a class="hover:text-white" href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
+          <a class="hover:text-white" href={siteConfig.termsHref}>Terms</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</BaseLayout>

@@ -1,0 +1,30 @@
+---
+title: Data & Privacy
+description: How requests flow through the gateway and when Glideflow is a good fit.
+sidebar:
+  order: 8
+---
+
+Glideflow is intentionally transparent about data flow.
+
+## Request path
+
+1. Your application sends a request to the Glideflow API gateway.
+2. The gateway authenticates the request, meters usage, and selects the configured upstream model provider.
+3. The request is forwarded to the upstream provider such as DeepSeek, Qwen, or GLM.
+4. The provider response returns through the gateway to your application.
+
+## Good fit
+
+Glideflow is designed for independent developers, hobby projects, coding assistants, prototypes, early products, and workloads where cost matters.
+
+## Not a good fit
+
+Do not send regulated enterprise data, medical records, financial records, government data, secrets, or customer data that requires a provider-specific compliance review unless your own process approves the full routing chain.
+
+## Practical guidance
+
+- Keep API keys server-side.
+- Avoid sending secrets or production credentials in prompts.
+- Minimize sensitive user data before calling any third-party model provider.
+- Review the upstream provider chain before using Glideflow in a regulated workflow.
