@@ -1,0 +1,322 @@
+<style>
+  :root {
+    color-scheme: dark;
+  }
+
+  .glideflow-entry,
+  .glideflow-entry * {
+    box-sizing: border-box;
+  }
+
+  .glideflow-entry {
+    --gf-bg: #080a09;
+    --gf-panel: #07110f;
+    --gf-panel-soft: rgba(255, 255, 255, 0.055);
+    --gf-text: #f4f7f5;
+    --gf-muted: rgba(244, 247, 245, 0.68);
+    --gf-border: rgba(255, 255, 255, 0.12);
+    --gf-emerald: #6ee7b7;
+    --gf-emerald-strong: #5eead4;
+    --gf-ink: #07110f;
+    min-height: 100vh;
+    margin: -24px;
+    padding: 28px;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(110, 231, 183, 0.14), transparent 30%),
+      linear-gradient(to right, rgba(110, 231, 183, 0.08) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(110, 231, 183, 0.08) 1px, transparent 1px),
+      var(--gf-bg);
+    background-size: auto, 56px 56px, 56px 56px, auto;
+    color: var(--gf-text);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    letter-spacing: 0;
+  }
+
+  .glideflow-shell {
+    width: min(100%, 1080px);
+    border: 1px solid var(--gf-border);
+    border-radius: 18px;
+    background:
+      linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025)),
+      rgba(7, 17, 15, 0.92);
+    box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+    overflow: hidden;
+  }
+
+  .glideflow-nav {
+    min-height: 72px;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border-bottom: 1px solid var(--gf-border);
+  }
+
+  .glideflow-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--gf-text);
+    text-decoration: none;
+    font-weight: 700;
+  }
+
+  .glideflow-mark {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(110, 231, 183, 0.42);
+    background: rgba(110, 231, 183, 0.16);
+    color: var(--gf-emerald);
+    font-size: 17px;
+    font-weight: 800;
+  }
+
+  .glideflow-nav-link {
+    color: var(--gf-muted);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  .glideflow-nav-link:hover {
+    color: var(--gf-text);
+  }
+
+  .glideflow-main {
+    padding: 58px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.78fr);
+    gap: 40px;
+    align-items: center;
+  }
+
+  .glideflow-eyebrow {
+    width: fit-content;
+    margin: 0 0 18px;
+    padding: 7px 10px;
+    border: 1px solid rgba(110, 231, 183, 0.26);
+    border-radius: 8px;
+    background: rgba(110, 231, 183, 0.11);
+    color: var(--gf-emerald);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .glideflow-title {
+    max-width: 780px;
+    margin: 0;
+    color: var(--gf-text);
+    font-size: clamp(42px, 7vw, 72px);
+    line-height: 0.98;
+    font-weight: 760;
+    letter-spacing: 0;
+  }
+
+  .glideflow-copy {
+    max-width: 620px;
+    margin: 22px 0 0;
+    color: var(--gf-muted);
+    font-size: 18px;
+    line-height: 1.65;
+  }
+
+  .glideflow-actions {
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .glideflow-button {
+    min-height: 46px;
+    padding: 0 18px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    color: var(--gf-ink);
+    background: var(--gf-emerald);
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+  }
+
+  .glideflow-button:hover {
+    background: var(--gf-emerald-strong);
+  }
+
+  .glideflow-button:active {
+    transform: translateY(1px);
+  }
+
+  .glideflow-button.secondary {
+    color: var(--gf-text);
+    background: rgba(255, 255, 255, 0.075);
+    border-color: rgba(255, 255, 255, 0.16);
+  }
+
+  .glideflow-button.secondary:hover {
+    border-color: rgba(255, 255, 255, 0.32);
+    background: rgba(255, 255, 255, 0.11);
+  }
+
+  .glideflow-button.outline {
+    color: var(--gf-emerald);
+    background: rgba(110, 231, 183, 0.1);
+    border-color: rgba(110, 231, 183, 0.42);
+  }
+
+  .glideflow-button.outline:hover {
+    color: var(--gf-ink);
+    background: var(--gf-emerald-strong);
+    border-color: transparent;
+  }
+
+  .glideflow-card {
+    border: 1px solid var(--gf-border);
+    border-radius: 14px;
+    background: var(--gf-panel-soft);
+    overflow: hidden;
+  }
+
+  .glideflow-card-top {
+    min-height: 42px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--gf-border);
+    color: var(--gf-muted);
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  .glideflow-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .glideflow-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.24);
+  }
+
+  .glideflow-code {
+    margin: 0;
+    padding: 22px;
+    overflow-x: auto;
+    color: #d8fff2;
+    font: 13px/1.7 "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+
+  .glideflow-code strong {
+    color: var(--gf-emerald);
+    font-weight: 800;
+  }
+
+  .glideflow-base {
+    margin: 0 22px 22px;
+    padding: 13px 14px;
+    border: 1px solid rgba(110, 231, 183, 0.22);
+    border-radius: 8px;
+    background: rgba(110, 231, 183, 0.09);
+    color: var(--gf-emerald);
+    font: 13px/1.4 "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    overflow-wrap: anywhere;
+  }
+
+  @media (max-width: 860px) {
+    .glideflow-entry {
+      min-height: 100svh;
+      margin: -16px;
+      padding: 16px;
+    }
+
+    .glideflow-main {
+      grid-template-columns: 1fr;
+      padding: 34px 22px;
+    }
+
+    .glideflow-title {
+      font-size: clamp(38px, 12vw, 56px);
+    }
+
+    .glideflow-copy {
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .glideflow-nav {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .glideflow-actions {
+      flex-direction: column;
+    }
+
+    .glideflow-button {
+      width: 100%;
+    }
+
+    .glideflow-code {
+      font-size: 12px;
+      padding: 16px;
+    }
+  }
+</style>
+
+<section class="glideflow-entry">
+  <div class="glideflow-shell">
+    <header class="glideflow-nav">
+      <a class="glideflow-brand" href="/">
+        <span class="glideflow-mark">G</span>
+        <span>Glideflow</span>
+      </a>
+      <a class="glideflow-nav-link" href="https://glideflowai.com/docs">Docs</a>
+    </header>
+
+    <main class="glideflow-main">
+      <div>
+        <p class="glideflow-eyebrow">OpenAI-compatible API</p>
+        <h1 class="glideflow-title">One key for multiple models.</h1>
+        <p class="glideflow-copy">
+          Run DeepSeek, Qwen, and GLM through a familiar OpenAI SDK setup with USD billing for independent developers.
+        </p>
+        <div class="glideflow-actions" aria-label="Account actions">
+          <a class="glideflow-button" href="/login">Sign in</a>
+          <a class="glideflow-button outline" href="/register">Create account</a>
+          <a class="glideflow-button secondary" href="https://glideflowai.com/docs">Docs</a>
+        </div>
+      </div>
+
+      <aside class="glideflow-card" aria-label="API base URL">
+        <div class="glideflow-card-top">
+          <span>Base URL</span>
+          <span class="glideflow-dots" aria-hidden="true">
+            <span class="glideflow-dot"></span>
+            <span class="glideflow-dot"></span>
+            <span class="glideflow-dot"></span>
+          </span>
+        </div>
+        <pre class="glideflow-code"><code>client = OpenAI(
+  api_key=<strong>"sk-..."</strong>,
+  base_url=<strong>"https://api.glideflowai.com/v1"</strong>
+)</code></pre>
+        <p class="glideflow-base">https://api.glideflowai.com/v1</p>
+      </aside>
+    </main>
+  </div>
+</section>
