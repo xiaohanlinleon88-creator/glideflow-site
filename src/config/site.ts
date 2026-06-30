@@ -30,7 +30,11 @@ export const siteConfig = {
   loginHref: "https://app.glideflowai.com/login",
   registerHref: "https://app.glideflowai.com/register",
   docsHref: "/docs",
-  termsHref: "#",
+  termsHref: "/terms",
+  privacyHref: "/privacy",
+  refundHref: "/refund",
+  aupHref: "/aup",
+  contactHref: "mailto:support@glideflowai.com",
   models: [
     {
       id: "deepseek-chat",
