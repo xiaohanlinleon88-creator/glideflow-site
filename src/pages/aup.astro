@@ -1,0 +1,55 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { siteConfig } from "../config/site";
+---
+
+<LegalPage
+  title="Acceptable Use Policy"
+  description="This policy explains prohibited uses of Glideflow and the API gateway."
+>
+  <h2>1. Scope</h2>
+  <p>
+    This Acceptable Use Policy applies to your use of Glideflow, including the website, dashboard, API gateway, model routing, API keys, credits, documentation, and related services. You must also comply with applicable upstream model provider policies.
+  </p>
+
+  <h2>2. Illegal and harmful use</h2>
+  <p>You may not use Glideflow to create, facilitate, request, or distribute content, tools, or activity involving:</p>
+  <ul>
+    <li>Illegal activity or instructions to commit illegal acts.</li>
+    <li>Violence, self-harm, exploitation, harassment, hate, or abuse.</li>
+    <li>Child sexual abuse material or sexual content involving minors.</li>
+    <li>Fraud, scams, phishing, impersonation, credential theft, or deceptive activity.</li>
+    <li>Malware, ransomware, botnets, vulnerability exploitation, or unauthorized system access.</li>
+    <li>Spam, platform manipulation, fake engagement, or unsolicited bulk messaging.</li>
+  </ul>
+
+  <h2>3. Model and endpoint integrity</h2>
+  <p>
+    You may not use Glideflow to provide reverse-engineered, unauthorized, counterfeit, or misleading model endpoints. You may not claim that a model endpoint is official, exclusive, or provided directly by an upstream provider unless you have the right to make that claim.
+  </p>
+
+  <h2>4. Abuse of the service</h2>
+  <p>You may not:</p>
+  <ul>
+    <li>Bypass rate limits, credit limits, metering, authentication, or security controls.</li>
+    <li>Use high-frequency automated requests, scripts, or account creation to drain free credits, test stolen cards, or create artificial traffic.</li>
+    <li>Resell access in a way that hides abuse, avoids compliance, or misrepresents Glideflow or upstream providers.</li>
+    <li>Probe, scan, attack, overload, or disrupt Glideflow, upstream providers, or other users.</li>
+    <li>Use stolen payment methods, fraudulent chargebacks, or false account information.</li>
+  </ul>
+
+  <h2>5. Sensitive and regulated use</h2>
+  <p>
+    Do not use Glideflow for regulated medical, legal, financial, government, employment, housing, insurance, safety-critical, or high-impact decisions unless your own review approves the full provider chain and applicable law allows that use.
+  </p>
+
+  <h2>6. Monitoring and enforcement</h2>
+  <p>
+    We may monitor usage, logs, token patterns, and account activity to detect abuse, fraud, security risks, and policy violations. We may throttle, suspend, terminate, or report activity where we believe it violates this policy, our Terms, upstream provider policies, or law.
+  </p>
+
+  <h2>7. Reporting abuse</h2>
+  <p>
+    To report abuse, contact <a href={siteConfig.contactHref}>{siteConfig.supportEmail}</a> with relevant account, endpoint, timestamp, and usage details.
+  </p>
+</LegalPage>
