@@ -8,6 +8,7 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, `https://${siteConfig.domain}`).toString();
+const showComplianceFooter = Astro.url.pathname === "/";
 ---
 
 <!doctype html>
@@ -27,5 +28,19 @@ const canonical = new URL(Astro.url.pathname, `https://${siteConfig.domain}`).to
   </head>
   <body>
     <slot />
+    {
+      showComplianceFooter && (
+        <footer class="border-t border-white/10 bg-[#06120e] py-5 text-sm text-white/60">
+          <nav class="mx-auto flex max-w-6xl flex-wrap gap-x-6 gap-y-2 px-5" aria-label="Compliance footer">
+            <a class="hover:text-white" href={siteConfig.docsHref}>Docs</a>
+            <a class="hover:text-white" href={siteConfig.termsHref}>Terms</a>
+            <a class="hover:text-white" href={siteConfig.privacyHref}>Privacy</a>
+            <a class="hover:text-white" href={siteConfig.refundHref}>Refund</a>
+            <a class="hover:text-white" href={siteConfig.aupHref}>AUP</a>
+            <a class="hover:text-white" href={siteConfig.contactHref}>Contact</a>
+          </nav>
+        </footer>
+      )
+    }
   </body>
 </html>
