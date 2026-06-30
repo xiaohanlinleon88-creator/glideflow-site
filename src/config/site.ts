@@ -33,112 +33,58 @@ export const siteConfig = {
   termsHref: "#",
   models: [
     {
-      id: "deepseek-v4-flash",
-      name: "DeepSeek V4 Flash",
-      description: "A familiar low-friction default for chat, coding helpers, and everyday product features.",
-      bestFor: "Default chat and coding",
+      id: "deepseek-chat",
+      name: "DeepSeek Chat",
+      description: "A strong default for coding help, chat workflows, and everyday product features.",
+      bestFor: "Coding and general chat",
       inputPrice: 0.14,
       outputPrice: 0.28,
       currency: "USD"
     },
     {
-      id: "deepseek-v4-pro",
-      name: "DeepSeek V4 Pro",
-      description: "A stronger DeepSeek tier for heavier reasoning, debugging, and multi-step product work.",
+      id: "deepseek-reasoner",
+      name: "DeepSeek Reasoner",
+      description: "Step-by-step reasoning for debugging, planning, and harder multi-step tasks.",
       bestFor: "Reasoning and debugging",
-      inputPrice: 0.44,
-      outputPrice: 0.88,
+      inputPrice: 0.55,
+      outputPrice: 2.19,
       currency: "USD"
     },
     {
-      id: "qwen3.5-flash",
-      name: "Qwen3.5 Flash",
-      description: "A fast Qwen option for high-volume routing, lightweight agents, and latency-sensitive flows.",
-      bestFor: "Fast high-volume tasks",
-      inputPrice: 0.08,
-      outputPrice: 0.42,
+      id: "qwen-max",
+      name: "Qwen Max",
+      description: "A capable multilingual model for larger prompts and polished product experiences.",
+      bestFor: "Multilingual apps",
+      inputPrice: 0.4,
+      outputPrice: 1.2,
       currency: "USD"
     },
     {
-      id: "qwen3.5-plus",
-      name: "Qwen3.5 Plus",
-      description: "The core value model for multilingual apps, assistants, and production workloads.",
-      bestFor: "Core production apps",
-      inputPrice: 0.24,
-      outputPrice: 1.45,
-      currency: "USD"
-    },
-    {
-      id: "qwen3.5-35b-a3b",
-      name: "Qwen3.5 35B-A3B",
-      description: "A cost-efficient Qwen tier for classification, extraction, routing, and background jobs.",
-      bestFor: "Efficient background work",
-      inputPrice: 0.13,
-      outputPrice: 0.92,
-      currency: "USD"
-    },
-    {
-      id: "qwen3.5-27b",
-      name: "Qwen3.5 27B",
-      description: "Balanced quality and price for everyday app features with longer prompts.",
-      bestFor: "Balanced app features",
-      inputPrice: 0.18,
-      outputPrice: 1.45,
-      currency: "USD"
-    },
-    {
-      id: "qwen3.5-122b-a10b",
-      name: "Qwen3.5 122B-A10B",
-      description: "A stronger mixture-of-experts tier for complex assistants and richer reasoning workloads.",
-      bestFor: "Complex assistants",
-      inputPrice: 0.24,
-      outputPrice: 1.95,
-      currency: "USD"
-    },
-    {
-      id: "qwen3.5-397b-a17b",
-      name: "Qwen3.5 397B-A17B",
-      description: "The premium Qwen option for flagship workflows that need stronger instruction following.",
-      bestFor: "Flagship Qwen quality",
-      inputPrice: 0.36,
-      outputPrice: 2.3,
+      id: "glm-4",
+      name: "GLM-4",
+      description: "A practical low-cost option for prototypes, agents, and high-volume background jobs.",
+      bestFor: "Low-cost volume",
+      inputPrice: 0.2,
+      outputPrice: 0.6,
       currency: "USD"
     }
   ] satisfies ModelConfig[],
   comparison: [
     {
       provider: "Glideflow",
-      model: "Qwen3.5 Plus",
-      inputPrice: 0.24,
-      outputPrice: 1.45,
+      model: "DeepSeek Chat",
+      inputPrice: 0.14,
+      outputPrice: 0.28,
       currency: "USD",
-      note: "Launch price"
-    },
-    {
-      provider: "OpenRouter",
-      model: "Qwen3.5 Plus",
-      inputPrice: 0.26,
-      outputPrice: 1.56,
-      currency: "USD",
-      note: "Public list price",
-      sourceUrl: "https://openrouter.ai/qwen"
+      note: "Launch placeholder"
     },
     {
       provider: "Glideflow",
-      model: "Qwen3.5 397B-A17B",
-      inputPrice: 0.36,
-      outputPrice: 2.3,
+      model: "DeepSeek Reasoner",
+      inputPrice: 0.55,
+      outputPrice: 2.19,
       currency: "USD",
-      note: "Launch price"
-    },
-    {
-      provider: "OpenRouter",
-      model: "Qwen3.5 397B-A17B",
-      inputPrice: 0.385,
-      outputPrice: 2.45,
-      currency: "USD",
-      note: "Public list price",
-      sourceUrl: "https://openrouter.ai/qwen"
+      note: "Launch placeholder"
     },
     {
       provider: "OpenAI",
