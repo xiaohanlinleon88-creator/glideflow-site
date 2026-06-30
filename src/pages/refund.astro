@@ -1,0 +1,49 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { siteConfig } from "../config/site";
+---
+
+<LegalPage
+  title="Refund & Cancellation Policy"
+  description="This policy explains how prepaid credits, refunds, billing errors, and cancellation work for Glideflow."
+>
+  <h2>1. Prepaid credits</h2>
+  <p>
+    Glideflow uses prepaid credits unless otherwise agreed in writing. Credits are deducted as you use models through the API, based on token usage, model pricing, and any applicable dashboard pricing.
+  </p>
+
+  <h2>2. Refund window for unused credits</h2>
+  <p>
+    You may request a refund of unused credits within 7 days of purchase. To request a refund, contact <a href={siteConfig.contactHref}>{siteConfig.supportEmail}</a> with the account email, payment receipt, purchase date, and reason for the request.
+  </p>
+
+  <h2>3. Consumed credits are not refundable</h2>
+  <p>
+    Credits already consumed by token usage are not refundable. Once a request has been processed by Glideflow or an upstream model provider, the related usage cost is final except where we confirm a duplicate payment, billing error, or other issue required by law.
+  </p>
+
+  <h2>4. Duplicate payments and billing errors</h2>
+  <p>
+    If you believe you were charged twice, charged the wrong amount, or affected by a metering error, contact us at <a href={siteConfig.contactHref}>{siteConfig.supportEmail}</a>. If we confirm an error, we may issue a refund, credit adjustment, or other correction.
+  </p>
+
+  <h2>5. Abuse and policy violations</h2>
+  <p>
+    Refunds may be denied where credits were connected to fraud, abuse, high-frequency automated misuse, violation of our Acceptable Use Policy, chargeback abuse, or attempts to bypass service controls.
+  </p>
+
+  <h2>6. Processing time</h2>
+  <p>
+    Approved refunds are usually submitted to the payment processor within 10 business days. The time for funds to appear depends on the payment method, payment processor, bank, and card network.
+  </p>
+
+  <h2>7. Cancellation</h2>
+  <p>
+    Glideflow does not provide a subscription by default. You can stop using the service at any time, revoke API keys, and choose not to purchase more credits. If a subscription or recurring plan is introduced later, the applicable cancellation terms will be shown before purchase.
+  </p>
+
+  <h2>8. Contact</h2>
+  <p>
+    Refund and billing questions can be sent to <a href={siteConfig.contactHref}>{siteConfig.supportEmail}</a>.
+  </p>
+</LegalPage>
