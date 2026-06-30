@@ -1,0 +1,82 @@
+---
+import LegalPage from "../components/LegalPage.astro";
+import { siteConfig } from "../config/site";
+---
+
+<LegalPage
+  title="Terms of Service"
+  description="These terms govern access to Glideflow, prepaid credits, usage-based billing, and OpenAI-compatible API access."
+>
+  <h2>1. Agreement to these terms</h2>
+  <p>
+    These Terms of Service govern your access to and use of Glideflow, including the website, dashboard, API gateway, documentation, prepaid credits, and related services. By creating an account, purchasing credits, generating an API key, or using the service, you agree to these terms.
+  </p>
+
+  <h2>2. Service description</h2>
+  <p>
+    Glideflow provides an OpenAI-compatible API gateway that routes requests to selected upstream model providers. Model availability, latency, context limits, outputs, and capabilities may vary by upstream provider and by model.
+  </p>
+
+  <h2>3. Accounts and API keys</h2>
+  <p>
+    You are responsible for your account, API keys, applications, prompts, outputs, and all activity under your credentials. Keep API keys server-side and do not share them publicly. We may suspend or revoke keys that are leaked, abused, or used in violation of these terms.
+  </p>
+
+  <h2>4. Credits and billing</h2>
+  <p>
+    Glideflow uses prepaid credits unless we separately agree otherwise in writing. There is no subscription by default. Credits are deducted based on usage, including model, token volume, and applicable pricing shown in the dashboard or related pricing materials.
+  </p>
+  <p>
+    Credits are not a bank account, stored value account, or cash equivalent. Prices may change as upstream provider costs, payment costs, or infrastructure costs change. We will make reasonable efforts to keep pricing clear before usage is charged.
+  </p>
+
+  <h2>5. Refunds</h2>
+  <p>
+    Refunds are handled under our <a href={siteConfig.refundHref}>Refund & Cancellation Policy</a>. In general, unused prepaid credits may be refunded within 7 days of purchase. Credits already consumed by token usage are not refundable, except for duplicate payments, confirmed billing errors, or other cases required by law.
+  </p>
+
+  <h2>6. Acceptable use</h2>
+  <p>
+    Your use of Glideflow must comply with our <a href={siteConfig.aupHref}>Acceptable Use Policy</a>, applicable law, and upstream provider policies. You may not use the service for illegal activity, abuse, fraud, unauthorized access, high-frequency automated abuse, or attempts to bypass usage controls.
+  </p>
+
+  <h2>7. Upstream providers</h2>
+  <p>
+    Requests may be forwarded to third-party upstream model providers selected by configuration, availability, routing, or your requested model. Upstream providers may process request content, metadata, and outputs according to their own systems and policies.
+  </p>
+
+  <h2>8. User content and outputs</h2>
+  <p>
+    You are responsible for the prompts, files, code, data, and other content you submit, and for how you use generated outputs. Outputs may be inaccurate, incomplete, offensive, unsafe, or unsuitable for your use case. You should independently review outputs before relying on them.
+  </p>
+
+  <h2>9. Service changes and availability</h2>
+  <p>
+    We may add, remove, limit, replace, or modify models, providers, features, prices, rate limits, or routing behavior. We may interrupt or limit the service for maintenance, security, abuse prevention, upstream outages, or operational reasons.
+  </p>
+
+  <h2>10. No regulated use without review</h2>
+  <p>
+    Glideflow is intended for independent developers, prototypes, coding tools, internal tools, and similar workloads. Do not use it for regulated medical, financial, legal, government, safety-critical, or high-risk decisions unless your own compliance process approves the full provider chain.
+  </p>
+
+  <h2>11. Disclaimers</h2>
+  <p>
+    The service is provided on an as-is and as-available basis. To the maximum extent permitted by law, we disclaim warranties of merchantability, fitness for a particular purpose, non-infringement, uninterrupted operation, accuracy, reliability, and availability.
+  </p>
+
+  <h2>12. Limitation of liability</h2>
+  <p>
+    To the maximum extent permitted by law, Glideflow will not be liable for indirect, incidental, special, consequential, exemplary, or punitive damages, or for lost profits, lost data, loss of goodwill, service interruption, upstream provider failures, or model output errors.
+  </p>
+
+  <h2>13. Suspension and termination</h2>
+  <p>
+    We may suspend or terminate access if we believe you violated these terms, created risk for the service, caused payment or fraud issues, or used the service in a way that may harm Glideflow, upstream providers, other users, or third parties.
+  </p>
+
+  <h2>14. Contact</h2>
+  <p>
+    Questions about these terms can be sent to <a href={siteConfig.contactHref}>{siteConfig.supportEmail}</a>.
+  </p>
+</LegalPage>
