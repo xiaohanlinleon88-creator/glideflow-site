@@ -3,8 +3,11 @@ import starlight from "@astrojs/starlight";
 import tailwindcss from "@tailwindcss/vite";
 import { siteConfig } from "./src/config/site";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   site: `https://${siteConfig.domain}`,
+
   integrations: [
     starlight({
       title: `${siteConfig.brandName} Docs`,
@@ -19,7 +22,10 @@ export default defineConfig({
       ]
     })
   ],
+
   vite: {
     plugins: [tailwindcss()]
-  }
+  },
+
+  adapter: cloudflare()
 });
