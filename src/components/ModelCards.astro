@@ -1,24 +1,38 @@
 ---
 import { formatUsdPerMillion, siteConfig } from "../config/site";
+
+const homeModels = siteConfig.models.filter((model) => model.tier === "home");
 ---
 
 <div class="model-grid">
-  {siteConfig.models.map((model) => (
-    <article class="model-card">
-      <div>
-        <p>{model.bestFor}</p>
-        <h3>{model.name}</h3>
-        <code>{model.id}</code>
+  {homeModels.map((model, index) => (
+    <article class="model-card reveal" data-d={String((index % 3) + 1)}>
+      <div class="model-card__top">
+        <div class="model-card__logo" aria-hidden="true">
+          <img src={model.providerLogo} alt="" loading="lazy" />
+        </div>
+        <div>
+          <p class="model-card__provider">{model.provider}</p>
+          <h3>{model.name}</h3>
+        </div>
       </div>
-      <p class="model-desc">{model.description}</p>
-      <dl>
+
+      <code class="model-card__id">{model.id}</code>
+      <p class="model-card__desc">{model.description}</p>
+
+      <div class="model-card__tags" aria-label={`${model.name} tags`}>
+        <span>{model.bestFor}</span>
+        {model.tags?.slice(0, 2).map((tag) => <span>{tag}</span>)}
+      </div>
+
+      <dl class="model-card__prices">
         <div>
           <dt>Input</dt>
-          <dd>{formatUsdPerMillion(model.inputPrice)}</dd>
+          <dd>{formatUsdPerMillion(model.inputPrice)}<span>/1M</span></dd>
         </div>
         <div>
           <dt>Output</dt>
-          <dd>{formatUsdPerMillion(model.outputPrice)}</dd>
+          <dd>{formatUsdPerMillion(model.outputPrice)}<span>/1M</span></dd>
         </div>
       </dl>
     </article>
@@ -34,65 +48,150 @@ import { formatUsdPerMillion, siteConfig } from "../config/site";
 
   .model-card {
     display: flex;
-    min-height: 250px;
+    min-height: 310px;
     flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+    border: 1px solid color-mix(in srgb, currentColor 13%, transparent);
     border-radius: 8px;
     padding: 18px;
-    background: color-mix(in srgb, Canvas 94%, currentColor 6%);
+    background:
+      linear-gradient(145deg, color-mix(in srgb, Canvas 94%, #34d399 6%), Canvas 68%),
+      color-mix(in srgb, Canvas 94%, currentColor 6%);
+    box-shadow: 0 18px 54px rgba(0, 0, 0, 0.08);
+    transition: border-color 180ms ease, transform 180ms ease;
   }
 
-  .model-card p:first-child {
-    margin: 0 0 10px;
+  .model-card:hover {
+    border-color: color-mix(in srgb, #34d399 46%, currentColor 12%);
+    transform: translateY(-2px);
+  }
+
+  .model-card__top {
+    display: grid;
+    grid-template-columns: 44px 1fr;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .model-card__logo {
+    display: grid;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    border: 1px solid rgba(52, 211, 153, 0.24);
+    border-radius: 8px;
+    background: #07110f;
+  }
+
+  .model-card__logo img {
+    width: 26px;
+    height: 26px;
+    object-fit: contain;
+  }
+
+  .model-card__provider {
+    margin: 0 0 4px;
     color: #0f766e;
-    font-size: 0.78rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
   .model-card h3 {
-    margin: 0 0 6px;
-    font-size: 1.12rem;
+    margin: 0;
+    color: color-mix(in srgb, currentColor 94%, transparent);
+    font-size: 1rem;
+    line-height: 1.25;
   }
 
-  .model-card code {
+  .model-card__id {
+    display: block;
+    min-height: 2rem;
+    margin-top: 16px;
     font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
     font-size: 0.78rem;
-    color: color-mix(in srgb, currentColor 66%, transparent);
+    color: color-mix(in srgb, currentColor 58%, transparent);
+    overflow-wrap: anywhere;
   }
 
-  .model-desc {
-    margin: 18px 0;
-    color: color-mix(in srgb, currentColor 76%, transparent);
+  .model-card__desc {
+    flex: 1;
+    margin: 14px 0 16px;
+    color: color-mix(in srgb, currentColor 72%, transparent);
+    font-size: 0.92rem;
     line-height: 1.6;
   }
 
-  .model-card dl {
+  .model-card__tags {
+    display: flex;
+    min-height: 64px;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .model-card__tags span {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid color-mix(in srgb, #34d399 24%, currentColor 10%);
+    border-radius: 999px;
+    padding: 5px 8px;
+    color: color-mix(in srgb, currentColor 72%, transparent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .model-card__prices {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid color-mix(in srgb, currentColor 11%, transparent);
   }
 
-  .model-card dt {
-    color: color-mix(in srgb, currentColor 58%, transparent);
-    font-size: 0.72rem;
+  .model-card__prices div {
+    min-width: 0;
+  }
+
+  .model-card__prices dt {
+    color: color-mix(in srgb, currentColor 54%, transparent);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
   }
 
-  .model-card dd {
-    margin: 4px 0 0;
-    font-weight: 700;
+  .model-card__prices dd {
+    margin: 5px 0 0;
+    color: color-mix(in srgb, currentColor 94%, transparent);
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+    font-size: 0.94rem;
+    font-weight: 800;
   }
 
-  @media (max-width: 980px) {
+  .model-card__prices span {
+    margin-left: 3px;
+    color: color-mix(in srgb, currentColor 48%, transparent);
+    font-size: 0.7rem;
+  }
+
+  @media (max-width: 1120px) {
+    .model-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 840px) {
     .model-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 
-  @media (max-width: 620px) {
+  @media (max-width: 560px) {
     .model-grid {
       grid-template-columns: 1fr;
     }
