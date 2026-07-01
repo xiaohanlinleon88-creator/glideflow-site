@@ -2,68 +2,146 @@
 import { formatUsdPerMillion, siteConfig } from "../config/site";
 
 const { showSources = false }: { showSources?: boolean } = Astro.props;
+
+const pricingGroups = [
+  {
+    label: "Home models",
+    note: "Public showcase models used on the marketing page.",
+    models: siteConfig.models.filter((model) => model.tier === "home")
+  },
+  {
+    label: "Console models",
+    note: "Available in the user console when you need more coverage.",
+    models: siteConfig.models.filter((model) => model.tier === "console")
+  }
+].filter((group) => group.models.length > 0);
 ---
 
-<div class="pricing-table-wrap">
-  <table class="pricing-table">
-    <thead>
-      <tr>
-        <th scope="col">Model</th>
-        <th scope="col">Best for</th>
-        <th scope="col">Input</th>
-        <th scope="col">Output</th>
-      </tr>
-    </thead>
-    <tbody>
-      {siteConfig.models.map((model) => (
-        <tr>
-          <th scope="row">
-            <span>{model.name}</span>
-            <code>{model.id}</code>
-          </th>
-          <td>{model.bestFor}</td>
-          <td>{formatUsdPerMillion(model.inputPrice)} / 1M tokens</td>
-          <td>{formatUsdPerMillion(model.outputPrice)} / 1M tokens</td>
-        </tr>
-      ))}
-    </tbody>
-  </table>
+<div class="pricing-shell">
+  {pricingGroups.map((group) => (
+    <section class="pricing-group" aria-labelledby={`pricing-${group.label.toLowerCase().replaceAll(" ", "-")}`}>
+      <div class="pricing-group__head">
+        <div>
+          <h3 id={`pricing-${group.label.toLowerCase().replaceAll(" ", "-")}`}>{group.label}</h3>
+          <p>{group.note}</p>
+        </div>
+        <span>{group.models.length} models</span>
+      </div>
+
+      <div class="pricing-table-wrap">
+        <table class="pricing-table">
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col">Context</th>
+              <th scope="col">Input $/1M</th>
+              <th scope="col">Output $/1M</th>
+              <th scope="col">Tags</th>
+            </tr>
+          </thead>
+          <tbody>
+            {group.models.map((model) => (
+              <tr>
+                <th scope="row">
+                  <span class="model-cell">
+                    <span class="model-logo" aria-hidden="true">
+                      <img src={model.providerLogo} alt="" loading="lazy" />
+                    </span>
+                    <span>
+                      <strong>{model.name}</strong>
+                      <small>{model.provider}</small>
+                      <code>{model.id}</code>
+                    </span>
+                  </span>
+                </th>
+                <td>{model.contextLength ?? "Provider limit"}</td>
+                <td class="price-cell">{formatUsdPerMillion(model.inputPrice)}</td>
+                <td class="price-cell">{formatUsdPerMillion(model.outputPrice)}</td>
+                <td>
+                  <span class="tag-list">
+                    {(model.tags ?? [model.bestFor]).map((tag) => <span>{tag}</span>)}
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  ))}
+
   {showSources && (
     <p class="pricing-note">
-      Prices are configured placeholders. Update <code>src/config/site.ts</code> before launch.
+      Prices are per 1 million tokens in USD and are synced from <code>src/config/site.ts</code>.
     </p>
   )}
 </div>
 
 <style>
-  .pricing-table-wrap {
-    width: 100%;
-    overflow-x: auto;
-    border: 1px solid color-mix(in srgb, currentColor 14%, transparent);
+  .pricing-shell {
+    display: grid;
+    gap: 18px;
+  }
+
+  .pricing-group {
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, currentColor 12%, transparent);
     border-radius: 8px;
     background: color-mix(in srgb, Canvas 94%, currentColor 6%);
   }
 
+  .pricing-group__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 18px;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    background: linear-gradient(135deg, rgba(52, 211, 153, 0.08), transparent 58%);
+  }
+
+  .pricing-group__head h3 {
+    margin: 0;
+    color: color-mix(in srgb, currentColor 94%, transparent);
+    font-size: 1.05rem;
+  }
+
+  .pricing-group__head p {
+    margin: 6px 0 0;
+    color: color-mix(in srgb, currentColor 62%, transparent);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .pricing-group__head > span {
+    flex: 0 0 auto;
+    border: 1px solid rgba(52, 211, 153, 0.22);
+    border-radius: 999px;
+    padding: 6px 10px;
+    color: #0f766e;
+    font-size: 0.75rem;
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .pricing-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+  }
+
   .pricing-table {
     width: 100%;
-    min-width: 680px;
+    min-width: 920px;
     border-collapse: collapse;
-    font-size: 0.95rem;
+    font-size: 0.94rem;
   }
 
   .pricing-table th,
   .pricing-table td {
-    padding: 16px;
-    border-bottom: 1px solid color-mix(in srgb, currentColor 10%, transparent);
+    padding: 16px 18px;
+    border-bottom: 1px solid color-mix(in srgb, currentColor 9%, transparent);
     text-align: left;
-    vertical-align: top;
-  }
-
-  .pricing-table thead th {
-    color: color-mix(in srgb, currentColor 66%, transparent);
-    font-size: 0.78rem;
-    font-weight: 700;
-    text-transform: uppercase;
+    vertical-align: middle;
   }
 
   .pricing-table tbody tr:last-child th,
@@ -71,22 +149,100 @@ const { showSources = false }: { showSources?: boolean } = Astro.props;
     border-bottom: 0;
   }
 
-  .pricing-table th span {
-    display: block;
-    margin-bottom: 4px;
+  .pricing-table thead th {
+    color: color-mix(in srgb, currentColor 58%, transparent);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
-  .pricing-table code {
-    font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+  .model-cell {
+    display: grid;
+    grid-template-columns: 42px minmax(220px, 1fr);
+    gap: 12px;
+    align-items: center;
+  }
+
+  .model-logo {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid rgba(52, 211, 153, 0.24);
+    border-radius: 8px;
+    background: #07110f;
+  }
+
+  .model-logo img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+  }
+
+  .model-cell strong,
+  .model-cell small,
+  .model-cell code {
+    display: block;
+  }
+
+  .model-cell strong {
+    color: color-mix(in srgb, currentColor 96%, transparent);
+    font-size: 0.96rem;
+    line-height: 1.35;
+  }
+
+  .model-cell small {
+    margin-top: 3px;
+    color: color-mix(in srgb, currentColor 58%, transparent);
     font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .model-cell code {
+    margin-top: 5px;
     color: #0f766e;
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+    font-size: 0.76rem;
+    overflow-wrap: anywhere;
+  }
+
+  .price-cell {
+    color: color-mix(in srgb, currentColor 94%, transparent);
+    font-family: var(--font-mono, "SFMono-Regular", Consolas, monospace);
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    min-width: 190px;
+  }
+
+  .tag-list span {
+    display: inline-flex;
+    border: 1px solid color-mix(in srgb, #34d399 22%, currentColor 10%);
+    border-radius: 999px;
+    padding: 5px 8px;
+    color: color-mix(in srgb, currentColor 68%, transparent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
   }
 
   .pricing-note {
     margin: 0;
-    padding: 12px 16px;
-    border-top: 1px solid color-mix(in srgb, currentColor 10%, transparent);
-    color: color-mix(in srgb, currentColor 70%, transparent);
+    color: color-mix(in srgb, currentColor 66%, transparent);
     font-size: 0.86rem;
+  }
+
+  @media (max-width: 700px) {
+    .pricing-group__head {
+      display: grid;
+    }
   }
 </style>
