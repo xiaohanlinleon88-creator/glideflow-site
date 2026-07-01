@@ -1,9 +1,9 @@
 ---
 import ApiCode from "../components/ApiCode.astro";
-import ComparisonTable from "../components/ComparisonTable.astro";
+import ModelCards from "../components/ModelCards.astro";
 import PricingTable from "../components/PricingTable.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
-import { siteConfig, formatUsdPerMillion } from "../config/site";
+import { siteConfig } from "../config/site";
 
 const navItems = [
   { label: "Models", href: "#models" },
@@ -213,27 +213,8 @@ r = client.chat.completions.create(
             Strong open and frontier-class models for coding, reasoning, and high-volume work. One key reaches all of them.
           </p>
         </div>
-        <div class="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-          {siteConfig.models.map((m, i) => (
-            <article class="reveal group flex flex-col rounded-2xl border border-black/10 bg-white p-6 transition-colors hover:border-emerald-500/40 dark:border-white/10 dark:bg-white/[0.03] dark:hover:border-emerald-300/40" data-d={String((i % 2) + 1)}>
-              <div class="flex items-center gap-3">
-                <span class="grid h-10 w-10 place-items-center rounded-xl border border-emerald-500/30 bg-emerald-400/12 font-mono text-sm font-bold text-emerald-700 dark:text-emerald-300">
-                  {m.name.slice(0, 2)}
-                </span>
-                <div>
-                  <h3 class="font-semibold text-[#0c0f0e] dark:text-white">{m.name}</h3>
-                  <code class="font-mono text-xs text-black/45 dark:text-white/45">{m.id}</code>
-                </div>
-              </div>
-              <p class="mt-4 flex-1 text-sm leading-6 text-black/60 dark:text-white/60">{m.description}</p>
-              <div class="mt-5 flex items-center justify-between border-t border-black/8 pt-4 text-sm dark:border-white/8">
-                <span class="rounded-md bg-black/[0.04] px-2 py-1 text-xs font-medium text-black/60 dark:bg-white/[0.06] dark:text-white/60">{m.bestFor}</span>
-                <span class="font-mono text-xs text-black/55 dark:text-white/55">
-                  {formatUsdPerMillion(m.inputPrice)} in / {formatUsdPerMillion(m.outputPrice)} out
-                </span>
-              </div>
-            </article>
-          ))}
+        <div class="mt-10">
+          <ModelCards />
         </div>
       </div>
     </section>
@@ -266,9 +247,9 @@ r = client.chat.completions.create(
             <figcaption class="border-b border-white/10 bg-white/[0.04] px-4 py-3 font-mono text-xs text-emerald-300/80">switch.py</figcaption>
             <pre class="overflow-x-auto px-5 py-5 font-mono text-[13px] leading-7 text-[#d8fff2]"><code>{`# one client, many models
 for model in [
-    "deepseek-chat",
-    "qwen-max",
-    "glm-4",
+    "qwen3.5-plus",
+    "deepseek-v4-flash",
+    "minimax-m3",
 ]:
     client.chat.completions.create(
         model=model,
@@ -287,14 +268,10 @@ for model in [
             Price and performance, side by side
           </h2>
           <p class="mt-4 text-lg leading-8 text-black/60 dark:text-white/64">
-            The same OpenAI request shape, at open-model economics. Compare per-million-token pricing against frontier list prices.
+            The same OpenAI request shape, priced per 1 million tokens in USD. Home models are public picks, console models expand coverage.
           </p>
         </div>
         <div class="reveal mt-10">
-          <ComparisonTable />
-        </div>
-        <div class="reveal mt-14">
-          <h3 class="text-xl font-semibold text-[#0c0f0e] dark:text-white">Per-model pricing</h3>
           <div class="mt-5">
             <PricingTable />
           </div>
