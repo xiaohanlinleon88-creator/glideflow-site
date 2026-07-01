@@ -20,7 +20,7 @@ export const siteConfig = {
   apiBaseUrl: "https://api.glideflowai.com/v1",
   supportEmail: "support@glideflowai.com",
   description:
-    "Drop-in OpenAI-compatible API. One key for multiple models, USD billing, and a familiar SDK setup for independent developers.",
+    "The curated gateway to Chinese AI models. Run DeepSeek, Qwen, and GLM through one OpenAI-compatible API, billed in USD.",
   ctaHref: "https://app.glideflowai.com/register",
   loginHref: "https://app.glideflowai.com/login",
   registerHref: "https://app.glideflowai.com/register",
